@@ -1,4 +1,4 @@
-package com.uuevc.libplatform.utils;
+package com.sjl.libplatform.util;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -19,7 +19,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-
+ /**
+  * 图像操作工具类
+  *
+  * @author 林zero
+  * @date 2018/12/9
+  */
 public class BitmapUtil {
     public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // 源图片的高度和宽度
@@ -247,7 +252,8 @@ public class BitmapUtil {
     public static Bitmap convertViewToBitmap(View view) {
         view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
         view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
-        view.buildDrawingCache();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache(true);
         return view.getDrawingCache();
     }
 }

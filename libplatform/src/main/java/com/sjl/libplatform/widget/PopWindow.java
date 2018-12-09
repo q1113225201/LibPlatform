@@ -1,4 +1,4 @@
-package com.uuevc.libplatform.widget;
+package com.sjl.libplatform.widget;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
-import com.uuevc.libplatform.R;
-import com.uuevc.libplatform.utils.SystemUtil;
+import com.sjl.libplatform.R;
+import com.sjl.libplatform.util.SystemUtil;
 
 /**
  * PopWindow
@@ -17,7 +17,6 @@ import com.uuevc.libplatform.utils.SystemUtil;
  * @author 林zero
  * @date 2018/3/18
  */
-
 public class PopWindow {
     private Activity activity;
     private int layoutId;
@@ -72,20 +71,22 @@ public class PopWindow {
         this.height = height;
     }
 
-    public void showAsDropDown(View view) {
-        showAsDropDown(view, 0.3f);
+    public PopupWindow showAsDropDown(View view) {
+        return showAsDropDown(view, 0.3f);
     }
 
-    public void showAsDropDown(View view, float alpha) {
+    public PopupWindow showAsDropDown(View view, float alpha) {
         initPopupWindow();
         popupWindow.showAsDropDown(view);
         SystemUtil.changeAlpha(activity, alpha);
+        return popupWindow;
     }
 
-    public void showAtLocation(View parent, int gravity, int x, int y) {
+    public PopupWindow showAtLocation(View parent, int gravity, int x, int y) {
         initPopupWindow();
         popupWindow.showAtLocation(parent, gravity, x, y);
         SystemUtil.changeAlpha(activity, 0.3f);
+        return popupWindow;
     }
 
     public void dismiss() {

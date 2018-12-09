@@ -1,4 +1,4 @@
-package com.uuevc.libplatform.utils;
+package com.sjl.libplatform.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -9,10 +9,12 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.channels.Channel;
 
-/**
- * IO工具类
- *
- */
+ /**
+  * IO工具类
+  *
+  * @author 林zero
+  * @date 2018/12/9
+  */
 public class IOUtil {
 
     /**

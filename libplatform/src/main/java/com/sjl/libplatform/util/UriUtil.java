@@ -1,4 +1,4 @@
-package com.uuevc.libplatform.utils;
+package com.sjl.libplatform.util;
 
 import android.annotation.TargetApi;
 import android.content.ContentUris;

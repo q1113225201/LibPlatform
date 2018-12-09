@@ -1,4 +1,4 @@
-package com.uuevc.libplatform.base;
+package com.sjl.libplatform.base;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,9 +12,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.umeng.analytics.MobclickAgent;
-import com.uuevc.libplatform.PlatformInit;
-import com.uuevc.libplatform.utils.PermisstionUtil;
+import com.sjl.libplatform.PlatformInit;
+import com.sjl.libplatform.util.PermisstionUtil;
 
 /**
  * PlatformActivity
@@ -36,18 +35,6 @@ public class PlatformActivity extends AppCompatActivity {
         PlatformInit.getInstance().pushActivity(this);
         activity = this;
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
     }
 
     @Override

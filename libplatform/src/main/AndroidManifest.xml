@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.uuevc.libplatform" >
+    package="com.sjl.libplatform" >
     <application>
         <!-- 7.0文件 -->
         <provider

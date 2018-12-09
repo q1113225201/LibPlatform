@@ -1,4 +1,4 @@
-package com.uuevc.libplatform.utils;
+package com.sjl.libplatform.util;
 
 import android.content.Context;
 import android.net.Uri;
@@ -25,10 +25,12 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-/**
- * <h3>File工具类</h3>
- * <p>主要封装了一些对文件读写的操作
- */
+ /**
+  * File工具类
+  *
+  * @author 林zero
+  * @date 2018/12/9
+  */
 public class FileUtil {
 
     private FileUtil() {

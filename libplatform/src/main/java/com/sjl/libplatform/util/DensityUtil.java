@@ -1,10 +1,10 @@
-package com.uuevc.libplatform.utils;
+package com.sjl.libplatform.util;
 
 import android.content.Context;
 import android.util.TypedValue;
 
 /**
- * DensityUtil
+ * 密度转换工具
  *
  * @author SJL
  * @date 2016/12/30

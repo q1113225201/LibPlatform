@@ -1,17 +1,17 @@
-package com.uuevc.libplatform;
+package com.sjl.libplatform;
 
 import android.app.Activity;
 import android.app.Application;
 
-import com.uuevc.libplatform.utils.SPUtil;
+import com.sjl.libplatform.util.SPUtil;
 
 import java.util.Stack;
 
 /**
  * PlatformInit
  *
- * @author 沈建林
- * @date 2018/9/21
+ * @author 林zero
+ * @date 2018/12/9
  */
 public class PlatformInit {
     private static final String TAG = "PlatformInit";
