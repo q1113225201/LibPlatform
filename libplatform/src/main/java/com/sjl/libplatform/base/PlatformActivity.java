@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -21,13 +22,10 @@ import com.sjl.libplatform.util.PermisstionUtil;
  * @author 沈建林
  * @date 2018/9/21
  */
-public class PlatformActivity extends AppCompatActivity {
+public abstract class PlatformActivity extends AppCompatActivity implements IPlatformView {
     protected InputMethodManager inputMethodManager;
     private Activity activity;
-
-    public Activity getActivity() {
-        return activity;
-    }
+    private View contentView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +33,13 @@ public class PlatformActivity extends AppCompatActivity {
         PlatformInit.getInstance().pushActivity(this);
         activity = this;
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        setContentView(inflate());
+        initView();
+        initData(getIntent());
+    }
+
+    private View inflate() {
+        return contentView = LayoutInflater.from(this).inflate(getContentViewLayout(), null);
     }
 
     @Override
@@ -105,5 +110,13 @@ public class PlatformActivity extends AppCompatActivity {
             InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             im.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public View getContentView() {
+        return contentView;
     }
 }

@@ -54,6 +54,9 @@ public class SystemUtil {
         return getScreen(context).x;
     }
 
+    public static void showKeyboard(View view){
+        
+    }
 
     /**
      * 关闭软键盘
