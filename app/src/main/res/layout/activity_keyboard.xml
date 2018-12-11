@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_focus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_view_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:text="View显示" />
+
+    <Button
+        android:id="@+id/btn_view_hide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:text="View取消" />
+
+    <Button
+        android:id="@+id/btn_activity_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Activity显示" />
+
+    <Button
+        android:id="@+id/btn_activity_hide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Activity取消" />
+
+    <Button
+        android:id="@+id/btn_toggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="切换" />
+
+</LinearLayout>

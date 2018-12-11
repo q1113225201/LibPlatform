@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.sjl.libplatform.PlatformInit;
+import com.sjl.libplatform.util.KeyboardUtil;
 import com.sjl.libplatform.util.PermisstionUtil;
 
 /**
@@ -22,8 +23,7 @@ import com.sjl.libplatform.util.PermisstionUtil;
  * @author 沈建林
  * @date 2018/9/21
  */
-public abstract class PlatformActivity extends AppCompatActivity implements IPlatformView {
-    protected InputMethodManager inputMethodManager;
+public abstract class PlatformActivity extends AppCompatActivity implements IPlatformView,View.OnClickListener {
     private Activity activity;
     private View contentView;
 
@@ -32,7 +32,6 @@ public abstract class PlatformActivity extends AppCompatActivity implements IPla
         super.onCreate(savedInstanceState);
         PlatformInit.getInstance().pushActivity(this);
         activity = this;
-        inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         setContentView(inflate());
         initView();
         initData(getIntent());
@@ -58,12 +57,7 @@ public abstract class PlatformActivity extends AppCompatActivity implements IPla
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (inputMethodManager != null) {
-            View view = getCurrentFocus();
-            if (null != view) {
-                inputMethodManager.hideSoftInputFromInputMethod(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-            }
-        }
+        KeyboardUtil.hideKeyboard(this);
     }
 
     @Override
@@ -71,7 +65,7 @@ public abstract class PlatformActivity extends AppCompatActivity implements IPla
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             View v = getCurrentFocus();
             if (isShouldHideKeyboard(v, ev)) {
-                hideKeyboard(v.getWindowToken());
+                KeyboardUtil.hideKeyboard(v);
             }
         }
         return super.dispatchTouchEvent(ev);
@@ -98,18 +92,6 @@ public abstract class PlatformActivity extends AppCompatActivity implements IPla
         }
         // 如果焦点不是EditText则忽略，这个发生在视图刚绘制完，第一个焦点不在EditText上，和用户用轨迹球选择其他的焦点
         return false;
-    }
-
-    /**
-     * 获取InputMethodManager，隐藏软键盘
-     *
-     * @param token
-     */
-    private void hideKeyboard(IBinder token) {
-        if (token != null) {
-            InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            im.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
-        }
     }
 
     public Activity getActivity() {

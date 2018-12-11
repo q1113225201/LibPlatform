@@ -2,12 +2,7 @@ package com.sjl.libplatform.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Point;
-import android.os.Bundle;
-import android.os.IBinder;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -54,19 +49,4 @@ public class SystemUtil {
         return getScreen(context).x;
     }
 
-    public static void showKeyboard(View view){
-        
-    }
-
-    /**
-     * 关闭软键盘
-     */
-    public static void hideKeyboard(IBinder token, Context context) {
-        if (token != null) {
-            InputMethodManager im = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (im != null) {
-                im.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
-            }
-        }
-    }
 }
