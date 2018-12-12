@@ -1,16 +1,13 @@
 package com.sjl.libplatform.base;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.sjl.libplatform.PlatformInit;
@@ -23,15 +20,13 @@ import com.sjl.libplatform.util.PermisstionUtil;
  * @author 林zero
  * @date 2018/9/21
  */
-public abstract class PlatformActivity extends AppCompatActivity implements IPlatformView,View.OnClickListener {
-    private Activity activity;
+public abstract class PlatformActivity extends AppCompatActivity implements IPlatformView, View.OnClickListener {
     private View contentView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PlatformInit.getInstance().pushActivity(this);
-        activity = this;
         setContentView(inflate());
         initView();
         initData(getIntent());
@@ -44,7 +39,6 @@ public abstract class PlatformActivity extends AppCompatActivity implements IPla
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        activity = null;
         PlatformInit.getInstance().popActivity(this);
     }
 
@@ -95,7 +89,7 @@ public abstract class PlatformActivity extends AppCompatActivity implements IPla
     }
 
     public Activity getActivity() {
-        return activity;
+        return this;
     }
 
     public View getContentView() {
