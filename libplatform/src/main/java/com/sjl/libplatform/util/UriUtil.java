@@ -15,7 +15,7 @@ import java.io.File;
 /**
  * Uri常用工具类
  *
- * @author SJL
+ * @author 林zero
  * @date 2016/11/14 21:52
  */
 public class UriUtil {

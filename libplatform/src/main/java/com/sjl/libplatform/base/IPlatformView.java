@@ -5,7 +5,7 @@ import android.content.Intent;
 /**
  * 平台View
  *
- * @author 沈建林
+ * @author 林zero
  * @date 2018/12/10
  */
 public interface IPlatformView {

@@ -6,15 +6,11 @@ import android.util.TypedValue;
 /**
  * 密度转换工具
  *
- * @author SJL
+ * @author 林zero
  * @date 2016/12/30
  */
 
 public class DensityUtil {
-    private DensityUtil() {
-          /* cannot be instantiated */
-        throw new UnsupportedOperationException("cannot be instantiated");
-    }
 
     /**
      * dp转px

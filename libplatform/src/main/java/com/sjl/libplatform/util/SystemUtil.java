@@ -2,15 +2,15 @@ package com.sjl.libplatform.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
-import android.view.View;
+import android.net.Uri;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 
 /**
  * SystemUtil
  *
- * @author 沈建林
+ * @author 林zero
  * @date 2018/9/21
  */
 public class SystemUtil {
@@ -49,4 +49,14 @@ public class SystemUtil {
         return getScreen(context).x;
     }
 
+    /**
+     * 跳转设置界面
+     */
+    public static void toSetting(Activity activity) {
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+        intent.setData(Uri.fromParts("package", activity.getPackageName(), null));
+        activity.startActivity(intent);
+    }
 }

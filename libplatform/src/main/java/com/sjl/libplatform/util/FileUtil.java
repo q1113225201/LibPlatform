@@ -25,33 +25,30 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
- /**
-  * File工具类
-  *
-  * @author 林zero
-  * @date 2018/12/9
-  */
+/**
+ * File工具类
+ *
+ * @author 林zero
+ * @date 2018/12/9
+ */
 public class FileUtil {
-
-    private FileUtil() {
-        throw new Error("￣﹏￣");
-    }
 
     /**
      * 分隔符.
      */
     public final static String FILE_EXTENSION_SEPARATOR = ".";
-
+    /**
+     * 默认编码格式
+     */
+    public final static String DEFAULT_CHARSET = "utf-8";
     /**
      * "/"
      */
     public final static String SEP = File.separator;
-
     /**
      * SD卡根目录
      */
-    public static final String SDPATH = Environment
-            .getExternalStorageDirectory() + File.separator;
+    public static final String SDPATH = Environment.getExternalStorageDirectory() + File.separator;
 
     /**
      * 判断SD卡是否可用
@@ -65,15 +62,13 @@ public class FileUtil {
 
     /**
      * 读取文件的内容
-     * <br>
-     * 默认utf-8编码
      *
      * @param filePath 文件路径
      * @return 字符串
      * @throws IOException
      */
     public static String readFile(String filePath) throws IOException {
-        return readFile(filePath, "utf-8");
+        return readFile(filePath, DEFAULT_CHARSET);
     }
 
     /**
@@ -87,16 +82,16 @@ public class FileUtil {
             throws IOException {
         if (TextUtils.isEmpty(filePath))
             return null;
-        if (TextUtils.isEmpty(charsetName))
-            charsetName = "utf-8";
+        if (TextUtils.isEmpty(charsetName)) {
+            charsetName = DEFAULT_CHARSET;
+        }
         File file = new File(filePath);
         StringBuilder fileContent = new StringBuilder("");
         if (!file.isFile())
             return null;
         BufferedReader reader = null;
         try {
-            InputStreamReader is = new InputStreamReader(new FileInputStream(
-                    file), charsetName);
+            InputStreamReader is = new InputStreamReader(new FileInputStream(file), charsetName);
             reader = new BufferedReader(is);
             String line;
             while ((line = reader.readLine()) != null) {
@@ -126,7 +121,7 @@ public class FileUtil {
      */
     public static List<String> readFileToList(String filePath)
             throws IOException {
-        return readFileToList(filePath, "utf-8");
+        return readFileToList(filePath, DEFAULT_CHARSET);
     }
 
     /**
@@ -136,12 +131,12 @@ public class FileUtil {
      * @param charsetName 字符编码
      * @return 文件不存在返回null，否则返回字符串集合
      */
-    public static List<String> readFileToList(String filePath,
-                                              String charsetName) throws IOException {
+    public static List<String> readFileToList(String filePath, String charsetName) throws IOException {
         if (TextUtils.isEmpty(filePath))
             return null;
-        if (TextUtils.isEmpty(charsetName))
-            charsetName = "utf-8";
+        if (TextUtils.isEmpty(charsetName)) {
+            charsetName = DEFAULT_CHARSET;
+        }
         File file = new File(filePath);
         List<String> fileContent = new ArrayList<String>();
         if (!file.isFile()) {
@@ -805,7 +800,7 @@ public class FileUtil {
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            String text = new String(buffer, "utf-8");
+            String text = new String(buffer, DEFAULT_CHARSET);
             return text;
         } catch (IOException e) {
             e.printStackTrace();

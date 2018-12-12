@@ -20,7 +20,7 @@ import com.sjl.libplatform.util.PermisstionUtil;
 /**
  * PlatformActivity
  *
- * @author 沈建林
+ * @author 林zero
  * @date 2018/9/21
  */
 public abstract class PlatformActivity extends AppCompatActivity implements IPlatformView,View.OnClickListener {

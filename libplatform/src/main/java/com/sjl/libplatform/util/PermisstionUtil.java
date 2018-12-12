@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * 权限请求工具类
  *
- * @author SJL
+ * @author 林zero
  * @date 2017/3/22
  */
 @TargetApi(Build.VERSION_CODES.M)
