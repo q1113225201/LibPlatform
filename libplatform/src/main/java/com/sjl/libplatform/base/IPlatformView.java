@@ -1,6 +1,6 @@
 package com.sjl.libplatform.base;
 
-import android.content.Intent;
+import android.os.Bundle;
 
 /**
  * 平台View
@@ -22,5 +22,5 @@ public interface IPlatformView {
     /**
      * 初始化数据
      */
-    void initData(Intent intent);
+    void initData(Bundle bundle);
 }

@@ -21,6 +21,9 @@ import com.sjl.libplatform.util.PermisstionUtil;
  * @date 2018/9/21
  */
 public abstract class PlatformActivity extends AppCompatActivity implements IPlatformView, View.OnClickListener {
+    /**
+     * 内容视图
+     */
     private View contentView;
 
     @Override
@@ -29,7 +32,7 @@ public abstract class PlatformActivity extends AppCompatActivity implements IPla
         PlatformInit.getInstance().pushActivity(this);
         setContentView(inflate());
         initView();
-        initData(getIntent());
+        initData(getIntent().getExtras());
     }
 
     private View inflate() {
@@ -50,8 +53,8 @@ public abstract class PlatformActivity extends AppCompatActivity implements IPla
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         KeyboardUtil.hideKeyboard(this);
+        super.onBackPressed();
     }
 
     @Override
