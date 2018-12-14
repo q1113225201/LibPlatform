@@ -43,7 +43,7 @@ public abstract class PlatformActivity extends AppCompatActivity implements IPla
     @Override
     public void onClick(View v) {
         if (!Util.isFastClick()) {
-            onViewCLick(v);
+            onViewClick(v);
         }
     }
 

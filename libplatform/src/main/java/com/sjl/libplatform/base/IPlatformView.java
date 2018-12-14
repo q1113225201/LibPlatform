@@ -29,5 +29,5 @@ public interface IPlatformView {
      * 点击事件
      * @param view
      */
-    void onViewCLick(View view);
+    void onViewClick(View view);
 }

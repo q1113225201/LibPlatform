@@ -65,7 +65,7 @@ public abstract class PlatformFragment extends Fragment implements IPlatformView
     @Override
     public void onClick(View v) {
         if (!Util.isFastClick()) {
-            onViewCLick(v);
+            onViewClick(v);
         }
     }
 

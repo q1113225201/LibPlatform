@@ -32,13 +32,8 @@ public class KeyboardActivity extends PlatformActivity implements View.OnClickLi
     }
 
     @Override
-    public void onViewCLick(View view) {
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onViewClick(View view) {
+        switch (view.getId()) {
             case R.id.btn_view_show:
                 KeyboardUtil.showKeyboard(etFocus);
                 break;
@@ -56,4 +51,5 @@ public class KeyboardActivity extends PlatformActivity implements View.OnClickLi
                 break;
         }
     }
+
 }
