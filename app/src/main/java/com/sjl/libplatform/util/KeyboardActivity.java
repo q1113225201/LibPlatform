@@ -1,6 +1,7 @@
 package com.sjl.libplatform.util;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
@@ -26,7 +27,12 @@ public class KeyboardActivity extends PlatformActivity implements View.OnClickLi
     }
 
     @Override
-    public void initData(Intent intent) {
+    public void initData(Bundle bundle) {
+
+    }
+
+    @Override
+    public void onViewCLick(View view) {
 
     }
 

@@ -8,13 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sjl.libplatform.util.Util;
+
 /**
  * PlatformFragment
  *
  * @author 沈建林
  * @date 2018/12/13
  */
-public abstract class PlatformFragment extends Fragment implements IPlatformView {
+public abstract class PlatformFragment extends Fragment implements IPlatformView, View.OnClickListener {
     /**
      * 内容视图
      */
@@ -57,6 +59,13 @@ public abstract class PlatformFragment extends Fragment implements IPlatformView
         }
         if (isVisibleToUser) {
             init();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (!Util.isFastClick()) {
+            onViewCLick(v);
         }
     }
 

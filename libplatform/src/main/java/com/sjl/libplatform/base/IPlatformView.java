@@ -1,6 +1,7 @@
 package com.sjl.libplatform.base;
 
 import android.os.Bundle;
+import android.view.View;
 
 /**
  * 平台View
@@ -23,4 +24,10 @@ public interface IPlatformView {
      * 初始化数据
      */
     void initData(Bundle bundle);
+
+    /**
+     * 点击事件
+     * @param view
+     */
+    void onViewCLick(View view);
 }

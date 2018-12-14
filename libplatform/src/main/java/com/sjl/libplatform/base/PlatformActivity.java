@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.sjl.libplatform.PlatformInit;
 import com.sjl.libplatform.util.KeyboardUtil;
 import com.sjl.libplatform.util.PermisstionUtil;
+import com.sjl.libplatform.util.Util;
 
 /**
  * PlatformActivity
@@ -37,6 +38,13 @@ public abstract class PlatformActivity extends AppCompatActivity implements IPla
 
     private View inflate() {
         return contentView = LayoutInflater.from(this).inflate(getContentViewLayout(), null);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (!Util.isFastClick()) {
+            onViewCLick(v);
+        }
     }
 
     @Override
