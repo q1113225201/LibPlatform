@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.sjl.libplatform.fragment.PagerActivity;
 import com.sjl.libplatform.util.ActivityUtil;
 import com.sjl.libplatform.util.KeyboardActivity;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         findViewById(R.id.btn_util_keyboard).setOnClickListener(this);
+        findViewById(R.id.btn_fragment).setOnClickListener(this);
     }
 
     @Override
@@ -26,6 +28,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btn_util_keyboard:
                 ActivityUtil.startActivity(this, KeyboardActivity.class);
+                break;
+            case R.id.btn_fragment:
+                ActivityUtil.startActivity(this, PagerActivity.class);
                 break;
         }
     }
