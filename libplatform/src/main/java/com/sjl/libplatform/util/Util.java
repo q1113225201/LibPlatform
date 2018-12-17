@@ -18,8 +18,8 @@ public class Util {
         long current = System.currentTimeMillis();
         if (current - lastClick < 2000) {
             lastClick = current;
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 }

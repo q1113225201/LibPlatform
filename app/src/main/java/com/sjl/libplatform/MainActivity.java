@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.sjl.libplatform.fragment.PagerActivity;
+import com.sjl.libplatform.toast.ToastActivity;
 import com.sjl.libplatform.util.ActivityUtil;
 import com.sjl.libplatform.util.KeyboardActivity;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         findViewById(R.id.btn_util_keyboard).setOnClickListener(this);
         findViewById(R.id.btn_fragment).setOnClickListener(this);
+        findViewById(R.id.btn_toast).setOnClickListener(this);
     }
 
     @Override
@@ -31,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_fragment:
                 ActivityUtil.startActivity(this, PagerActivity.class);
+                break;
+            case R.id.btn_toast:
+                ActivityUtil.startActivity(this, ToastActivity.class);
                 break;
         }
     }

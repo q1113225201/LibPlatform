@@ -5,20 +5,23 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn_util_keyboard"
+        android:id="@+id/btn_show_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="util-Keyboard" />
-
+        android:text="show_text" />
     <Button
-        android:id="@+id/btn_fragment"
+        android:id="@+id/btn_show_custom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="fragment" />
+        android:text="show_custom" />
     <Button
-        android:id="@+id/btn_toast"
+        android:id="@+id/btn_show_text_single"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="toast" />
-
+        android:text="show_text_single" />
+    <Button
+        android:id="@+id/btn_show_custom_single"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show_custom_single" />
 </LinearLayout>

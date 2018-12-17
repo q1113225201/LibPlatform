@@ -13,7 +13,7 @@ import com.sjl.libplatform.util.Util;
 /**
  * PlatformFragment
  *
- * @author 沈建林
+ * @author 林zero
  * @date 2018/12/13
  */
 public abstract class PlatformFragment extends Fragment implements IPlatformView, View.OnClickListener {
