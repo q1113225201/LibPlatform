@@ -49,9 +49,7 @@ public class ToastView {
         @Override
         public void run() {
             isShow = false;
-            if (popupWindow != null) {
-                popupWindow.dismiss();
-            }
+            cancel();
         }
     };
     private Activity activity;
@@ -136,6 +134,13 @@ public class ToastView {
             }
             mHandler.postDelayed(runnable, duration == Toast.LENGTH_LONG ? LENGTH_LONG : LENGTH_SHORT);
         }
+    }
+
+    public void cancel() {
+        if (popupWindow != null) {
+            popupWindow.dismiss();
+        }
+        mHandler.removeCallbacks(runnable);
     }
 
     /**
