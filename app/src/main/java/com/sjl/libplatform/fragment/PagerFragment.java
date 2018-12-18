@@ -30,6 +30,7 @@ public class PagerFragment extends PlatformFragment {
 
     @Override
     public void initView() {
+        Log.e(TAG,"initView:"+getArguments().getInt("type"));
         tvName = findViewById(R.id.tv_name);
         findViewById(R.id.tv_name).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +43,7 @@ public class PagerFragment extends PlatformFragment {
 
     @Override
     public void initData(Bundle bundle) {
+        Log.e(TAG,"initData:"+bundle.getInt("type"));
         tvName.setText(tvName.getText() + "," + bundle.getInt("type") + "");
     }
 

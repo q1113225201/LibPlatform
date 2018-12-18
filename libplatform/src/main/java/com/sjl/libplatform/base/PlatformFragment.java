@@ -42,24 +42,11 @@ public abstract class PlatformFragment extends Fragment implements IPlatformView
             contentView = inflater.inflate(getContentViewLayout(), container, false);
         }
         toInitView();
-        return contentView;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        if (!isInitData) {
-            initData(getArguments());
+        if (isVisible && !isInitData) {
             isInitData = true;
+            initData(getArguments());
         }
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (isVisible) {
-            toInitData();
-        }
+        return contentView;
     }
 
     private void toInitView() {
@@ -69,23 +56,21 @@ public abstract class PlatformFragment extends Fragment implements IPlatformView
         }
     }
 
-    private void toInitData() {
-        if (isVisible && !isInitData) {
-            initData(getArguments());
-            isInitData = true;
-        }
-    }
-
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            this.isVisible = true;
+        }
         if (contentView == null) {
             return;
         }
-        this.isVisible = isVisibleToUser;
-        if (isVisibleToUser && !isInitData) {
+        if (!isInitData && isVisible) {
             isInitData = true;
-            toInitData();
+            initData(getArguments());
+        }
+        if (isVisible) {
+            this.isVisible = false;
         }
     }
 

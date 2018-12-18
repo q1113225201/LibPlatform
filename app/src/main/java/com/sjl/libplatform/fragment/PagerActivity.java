@@ -24,7 +24,7 @@ public class PagerActivity extends PlatformActivity {
 
     private FragmentPagerAdapter adapter;
     private List<Fragment> list;
-    private String[] titles = {"全部", "必读学习", "选读学习"};
+    private String[] titles = {"Tab1", "Tab2", "Tab3", "Tab4"};
 
     @Override
     public void initView() {
@@ -43,6 +43,7 @@ public class PagerActivity extends PlatformActivity {
         list.add(PagerFragment.getInstance(0));
         list.add(PagerFragment.getInstance(1));
         list.add(PagerFragment.getInstance(2));
+        list.add(PagerFragment.getInstance(3));
         adapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
