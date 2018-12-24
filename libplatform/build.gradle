@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.q1113225201'//最后一个是github账号
-version '1.0.3'
+version '1.0.4'
 android {
     compileSdkVersion 28
 
