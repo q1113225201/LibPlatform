@@ -16,7 +16,7 @@ public class Util {
      */
     public static boolean isFastClick() {
         long current = System.currentTimeMillis();
-        if (current - lastClick >= 500) {
+        if (current - lastClick >= 100) {
             lastClick = current;
             return false;
         }
