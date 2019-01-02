@@ -2,14 +2,14 @@ package com.sjl.libplatform.toast;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sjl.libplatform.R;
 import com.sjl.libplatform.base.PlatformActivity;
-import com.sjl.libplatform.widget.ToastView;
+import com.sjl.libplatform.util.ToastUtil;
 
 public class ToastActivity extends PlatformActivity {
     private static final String TAG = "ToastActivity";
@@ -21,8 +21,10 @@ public class ToastActivity extends PlatformActivity {
 
     @Override
     public void initView() {
-        findViewById(R.id.btn_show_text_single).setOnClickListener(this);
-        findViewById(R.id.btn_show_custom_single).setOnClickListener(this);
+        findViewById(R.id.btn_show_text).setOnClickListener(this);
+        findViewById(R.id.btn_show_text_gravity).setOnClickListener(this);
+        findViewById(R.id.btn_show_custom).setOnClickListener(this);
+        findViewById(R.id.btn_show_custom_gravity).setOnClickListener(this);
     }
 
     @Override
@@ -31,51 +33,34 @@ public class ToastActivity extends PlatformActivity {
     }
 
     private int cnt = 0;
+    private View view;
 
     @Override
     public void onViewClick(View view) {
         cnt++;
         Log.e(TAG, "cnt=" + cnt);
         switch (view.getId()) {
-            case R.id.btn_show_text_single:
-                showTextToastSingle(cnt + "");
+            case R.id.btn_show_text:
+                ToastUtil.showToast("cnt=" + cnt);
                 break;
-            case R.id.btn_show_custom_single:
-                showCustomSingle(cnt + "");
+            case R.id.btn_show_text_gravity:
+                ToastUtil.showToast("cnt=" + cnt, Gravity.CENTER, 0, 0);
+                break;
+            case R.id.btn_show_custom:
+                ToastUtil.showToast(buildCustonView("cnt=" + cnt));
+                break;
+            case R.id.btn_show_custom_gravity:
+                ToastUtil.showToast(buildCustonView("cnt=" + cnt), Gravity.CENTER, 300, 0);
                 break;
         }
     }
 
-    private ToastView toastViewCustom;
-
-    private void showCustomSingle(String msg) {
-        if (toastViewCustom == null) {
-            toastViewCustom = new ToastView(this);
+    private View buildCustonView(String msg) {
+        if (view == null) {
+            view = LayoutInflater.from(this).inflate(R.layout.layout_toast_custom, null);
         }
-        View view = LayoutInflater.from(this).inflate(R.layout.layout_toast_custom, null);
         ((TextView) view.findViewById(R.id.tv_msg)).setText(msg);
-        toastViewCustom.setContentView(view);
-        toastViewCustom.show();
+        return view;
     }
 
-    private ToastView toastView;
-
-    private void showTextToastSingle(String msg) {
-        if (toastView == null) {
-            toastView = new ToastView(this, msg, Toast.LENGTH_SHORT);
-        }
-        toastView.setText(msg);
-        toastView.show();
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (toastView != null) {
-            toastView.cancel();
-        }
-        if (toastViewCustom != null) {
-            toastViewCustom.cancel();
-        }
-        super.onDestroy();
-    }
 }

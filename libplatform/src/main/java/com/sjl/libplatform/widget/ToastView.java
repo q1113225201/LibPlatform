@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -33,7 +34,8 @@ import java.lang.reflect.Method;
 public class ToastView {
     private static final int LENGTH_LONG = 4000;
     private static final int LENGTH_SHORT = 2000;
-    private Toast toast;
+    private Toast textToast;
+    private Toast customToast;
 
     private PopupWindow popupWindow;
     private LinearLayout contentParentView;
@@ -67,17 +69,17 @@ public class ToastView {
         contentParentView = view.findViewById(R.id.toast_parent);
     }
 
-    public void setText(CharSequence text) {
-        this.text = text;
-    }
-
     private void initToast() {
-        if (isNotificationEnabled(activity) && toast == null) {
-            toast = Toast.makeText(activity, "", duration);
-            toast.setDuration(duration);
-            toast.setGravity(gravity, offsetX, offsetY);
-            if (contentView != null) {
-                toast.setView(contentParentView);
+        if (isNotificationEnabled(activity)) {
+            if (textToast == null) {
+                textToast = Toast.makeText(activity, "", duration);
+                textToast.setDuration(duration);
+                textToast.setGravity(gravity, offsetX, offsetY);
+            } else if (customToast == null) {
+                customToast = Toast.makeText(activity, "", duration);
+                customToast.setDuration(duration);
+                customToast.setGravity(gravity, offsetX, offsetY);
+                customToast.setView(contentParentView);
             }
         } else if (popupWindow == null) {
             popupWindow = new PopupWindow(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -93,9 +95,18 @@ public class ToastView {
         return toastView;
     }
 
+
+    public void setText(CharSequence text) {
+        this.text = text;
+        this.contentView = null;
+        if (this.defaultView == null) {
+            this.defaultView = LayoutInflater.from(activity).inflate(R.layout.layout_toast_default, null);
+        }
+    }
     public void setContentView(View contentView) {
         this.contentView = contentView;
         this.defaultView = null;
+        this.text = null;
     }
 
     public void setGravity(int gravity, int offsetX, int offsetY) {
@@ -112,20 +123,18 @@ public class ToastView {
         isShow = true;
         if (isNotificationEnabled(activity)) {
             if (contentView != null) {
-                contentParentView.removeAllViews();
-                contentParentView.addView(contentView);
+                setCustomView();
+                customToast.show();
             } else {
-                toast.setText(text);
+                textToast.setGravity(gravity,offsetX,offsetY);
+                textToast.setText(text);
+                textToast.show();
             }
-            toast.show();
         } else {
             if (contentView != null) {
-                contentParentView.removeAllViews();
-                contentParentView.addView(contentView);
+                setCustomView();
+                popupWindow.setContentView(contentParentView);
             } else {
-                if (defaultView == null) {
-                    defaultView = LayoutInflater.from(activity).inflate(R.layout.layout_toast_default, null);
-                }
                 ((TextView) defaultView.findViewById(R.id.tv_default_text)).setText(text);
                 popupWindow.setContentView(defaultView);
             }
@@ -134,6 +143,14 @@ public class ToastView {
             }
             mHandler.postDelayed(runnable, duration == Toast.LENGTH_LONG ? LENGTH_LONG : LENGTH_SHORT);
         }
+    }
+
+    private void setCustomView() {
+        contentParentView.removeAllViews();
+        if (contentView.getParent() != null) {
+            ((ViewGroup) contentView.getParent()).removeView(contentView);
+        }
+        contentParentView.addView(contentView);
     }
 
     public void cancel() {
