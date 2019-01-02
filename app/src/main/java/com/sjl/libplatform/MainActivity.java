@@ -1,33 +1,36 @@
 package com.sjl.libplatform;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.sjl.libplatform.base.PlatformActivity;
 import com.sjl.libplatform.fragment.PagerActivity;
 import com.sjl.libplatform.toast.ToastActivity;
 import com.sjl.libplatform.util.ActivityUtil;
 import com.sjl.libplatform.util.KeyboardActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends PlatformActivity implements View.OnClickListener {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        initView();
+    public int getContentViewLayout() {
+        return R.layout.activity_main;
     }
 
-    private void initView() {
+    @Override
+    public void initView() {
         findViewById(R.id.btn_util_keyboard).setOnClickListener(this);
         findViewById(R.id.btn_fragment).setOnClickListener(this);
         findViewById(R.id.btn_toast).setOnClickListener(this);
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void initData(Bundle bundle) {
+
+    }
+
+    @Override
+    public void onViewClick(View view) {
+        switch (view.getId()) {
             case R.id.btn_util_keyboard:
                 ActivityUtil.startActivity(this, KeyboardActivity.class);
                 break;
@@ -39,4 +42,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
 }

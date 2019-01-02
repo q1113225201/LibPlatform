@@ -45,6 +45,7 @@ public class TimeUtil {
 
     /**
      * 时间字符串转时间戳
+     *
      * @param time
      * @param format
      * @return
@@ -57,5 +58,28 @@ public class TimeUtil {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    /**
+     * 时间戳格式化
+     *
+     * @param time
+     * @param format
+     * @return
+     */
+    public static String getTimeToString(long time, String format) {
+        return getTimeToString(new Date(time), format);
+    }
+
+    /**
+     * 时间戳格式化
+     *
+     * @param date
+     * @param format
+     * @return
+     */
+    public static String getTimeToString(Date date, String format) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format, Locale.getDefault());
+        return simpleDateFormat.format(date);
     }
 }

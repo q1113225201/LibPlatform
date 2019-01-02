@@ -10,7 +10,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
-import com.sjl.libplatform.PlatformInit;
 import com.sjl.libplatform.util.KeyboardUtil;
 import com.sjl.libplatform.util.PermisstionUtil;
 import com.sjl.libplatform.util.Util;
@@ -30,7 +29,6 @@ public abstract class PlatformActivity extends AppCompatActivity implements IPla
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PlatformInit.getInstance().pushActivity(this);
         setContentView(inflate());
         initView();
         initData(getIntent().getExtras());
@@ -45,12 +43,6 @@ public abstract class PlatformActivity extends AppCompatActivity implements IPla
         if (!Util.isFastClick()) {
             onViewClick(v);
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        PlatformInit.getInstance().popActivity(this);
     }
 
     @Override
