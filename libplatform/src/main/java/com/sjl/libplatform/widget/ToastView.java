@@ -8,7 +8,6 @@ import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +22,8 @@ import com.sjl.libplatform.R;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * ToastView
@@ -31,30 +32,42 @@ import java.lang.reflect.Method;
  * @date 2018/12/17
  */
 public class ToastView {
-    private static final int LENGTH_LONG = 4000;
+    private static final int LENGTH_LONG = 3500;
     private static final int LENGTH_SHORT = 2000;
+    /**
+     * 文字toast
+     */
     private Toast textToast;
-    private Toast customToast;
-
+    /**
+     * 视图toast
+     */
+    private Toast viewToast;
+    /**
+     * 无权限时用PopupWindow
+     */
     private PopupWindow popupWindow;
+    /**
+     * PopupWindow内容容器
+     */
     private LinearLayout contentParentView;
+    /**
+     * 内容视图
+     */
     private View contentView;
+    /**
+     * 默认视图
+     */
     private View defaultView;
+    /**
+     * toast属性
+     */
     private int gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
     private int offsetX;
     private int offsetY = 200;
-    private boolean isShow;
     private int duration;
-    private Handler mHandler = new Handler();
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            isShow = false;
-            cancel();
-        }
-    };
-    private Activity activity;
     private CharSequence text;
+
+    private Activity activity;
 
     public ToastView(Activity activity) {
         this(activity, null, Toast.LENGTH_SHORT);
@@ -74,11 +87,12 @@ public class ToastView {
                 textToast = Toast.makeText(activity, "", duration);
                 textToast.setDuration(duration);
                 textToast.setGravity(gravity, offsetX, offsetY);
-            } else if (customToast == null) {
-                customToast = Toast.makeText(activity, "", duration);
-                customToast.setDuration(duration);
-                customToast.setGravity(gravity, offsetX, offsetY);
-                customToast.setView(contentParentView);
+            }
+            if (viewToast == null) {
+                viewToast = Toast.makeText(activity, "", duration);
+                viewToast.setDuration(duration);
+                viewToast.setGravity(gravity, offsetX, offsetY);
+                viewToast.setView(contentParentView);
             }
         } else if (popupWindow == null) {
             popupWindow = new PopupWindow(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -94,37 +108,13 @@ public class ToastView {
         return toastView;
     }
 
-
-    public void setText(CharSequence text) {
-        this.text = text;
-        this.contentView = null;
-        if (this.defaultView == null) {
-            this.defaultView = LayoutInflater.from(activity).inflate(R.layout.layout_toast_default, null);
-        }
-    }
-
-    public void setContentView(View contentView) {
-        this.contentView = contentView;
-        this.defaultView = null;
-        this.text = null;
-    }
-
-    public void setGravity(int gravity, int offsetX, int offsetY) {
-        this.gravity = gravity;
-        this.offsetX = offsetX;
-        this.offsetY = offsetY;
-    }
-
     public void show() {
         initToast();
-        if (isShow) {
-            mHandler.removeCallbacks(runnable);
-        }
-        isShow = true;
+        startTimer();
         if (isNotificationEnabled(activity)) {
             if (contentView != null) {
                 setCustomView();
-                customToast.show();
+                viewToast.show();
             } else {
                 textToast.setGravity(gravity, offsetX, offsetY);
                 textToast.setText(text);
@@ -141,10 +131,38 @@ public class ToastView {
             if (!popupWindow.isShowing()) {
                 popupWindow.showAtLocation(activity.getWindow().getDecorView(), gravity, offsetX, offsetY);
             }
-            mHandler.postDelayed(runnable, duration == Toast.LENGTH_LONG ? LENGTH_LONG : LENGTH_SHORT);
         }
     }
 
+    private Timer timer;
+    private TimerTask timerTask;
+
+    private void startTimer() {
+        stopTimer();
+        timer = new Timer();
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                ToastView.this.cancel();
+            }
+        };
+        timer.schedule(timerTask, duration == Toast.LENGTH_SHORT ? LENGTH_SHORT : LENGTH_LONG);
+    }
+
+    private void stopTimer() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+        if(timerTask!=null){
+            timerTask.cancel();
+            timerTask = null;
+        }
+    }
+
+    /**
+     * 设置View视图
+     */
     private void setCustomView() {
         contentParentView.removeAllViews();
         if (contentView.getParent() != null) {
@@ -154,10 +172,16 @@ public class ToastView {
     }
 
     public void cancel() {
+        stopTimer();
         if (popupWindow != null) {
             popupWindow.dismiss();
         }
-        mHandler.removeCallbacks(runnable);
+        if (viewToast != null) {
+            viewToast.cancel();
+        }
+        if (textToast != null) {
+            textToast.cancel();
+        }
     }
 
     /**
@@ -184,4 +208,25 @@ public class ToastView {
             return true;
         }
     }
+
+    public void setText(CharSequence text) {
+        this.text = text;
+        this.contentView = null;
+        if (this.defaultView == null) {
+            this.defaultView = LayoutInflater.from(activity).inflate(R.layout.layout_toast_default, null);
+        }
+    }
+
+    public void setContentView(View contentView) {
+        this.contentView = contentView;
+        this.defaultView = null;
+        this.text = null;
+    }
+
+    public void setGravity(int gravity, int offsetX, int offsetY) {
+        this.gravity = gravity;
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+    }
+
 }

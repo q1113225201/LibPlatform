@@ -62,7 +62,6 @@ public class ToastUtil {
         }
         ToastView toastView = getToastView(activity, 1, gravity, offsetX, offsetY);
         toastView.setText(msg);
-        toastView.setGravity(gravity, offsetX, offsetY);
         toastView.show();
     }
 
@@ -77,7 +76,6 @@ public class ToastUtil {
         }
         ToastView toastView = getToastView(activity, 2, gravity, offsetX, offsetY);
         toastView.setContentView(view);
-        toastView.setGravity(gravity, offsetX, offsetY);
         toastView.show();
     }
 

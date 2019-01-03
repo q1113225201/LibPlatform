@@ -24,4 +24,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="show_custom_gravity" />
+    <Button
+        android:id="@+id/btn_show_toast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show_toast" />
+    <Button
+        android:id="@+id/btn_show_toast_gravity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show_toast_gravity" />
+
+
 </LinearLayout>
