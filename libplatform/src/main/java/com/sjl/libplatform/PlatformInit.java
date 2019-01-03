@@ -5,6 +5,7 @@ import android.app.Application;
 import android.os.Bundle;
 
 import com.sjl.libplatform.util.SPUtil;
+import com.sjl.libplatform.util.ToastUtil;
 
 import java.util.Stack;
 
@@ -68,6 +69,7 @@ public class PlatformInit {
 
             @Override
             public void onActivityDestroyed(Activity activity) {
+                ToastUtil.removeToastView(activity);
                 if (activityStack.contains(activity)) {
                     activityStack.remove(activity);
                 }

@@ -33,7 +33,6 @@ public class ToastActivity extends PlatformActivity {
     }
 
     private int cnt = 0;
-    private View view;
 
     @Override
     public void onViewClick(View view) {
@@ -47,18 +46,16 @@ public class ToastActivity extends PlatformActivity {
                 ToastUtil.showToast("cnt=" + cnt, Gravity.CENTER, 0, 0);
                 break;
             case R.id.btn_show_custom:
-                ToastUtil.showToast(buildCustonView("cnt=" + cnt));
+                ToastUtil.showToast(buildCustomView("cnt=" + cnt));
                 break;
             case R.id.btn_show_custom_gravity:
-                ToastUtil.showToast(buildCustonView("cnt=" + cnt), Gravity.CENTER, 300, 0);
+                ToastUtil.showToast(buildCustomView("cnt=" + cnt), Gravity.CENTER, 300, 0);
                 break;
         }
     }
 
-    private View buildCustonView(String msg) {
-        if (view == null) {
-            view = LayoutInflater.from(this).inflate(R.layout.layout_toast_custom, null);
-        }
+    private View buildCustomView(String msg) {
+        View view = LayoutInflater.from(this).inflate(cnt%2==0?R.layout.layout_toast_custom:R.layout.layout_toast_custom2, null);
         ((TextView) view.findViewById(R.id.tv_msg)).setText(msg);
         return view;
     }
