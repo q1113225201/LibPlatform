@@ -51,4 +51,10 @@ public class PagerFragment extends PlatformFragment {
     public void onViewClick(View view) {
 
     }
+
+    @Override
+    public void onDestroyView() {
+        Log.e(TAG,"onDestroyView");
+        super.onDestroyView();
+    }
 }

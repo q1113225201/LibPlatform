@@ -26,9 +26,12 @@ public class ActivityUtil {
         startActivityForResult(fragment, clz, requestCode, null);
     }
 
-    public static void startActivityForResult(@NonNull final Fragment fragment, @NonNull final Class<? extends Activity> clz, int requestCode, Bundle options) {
+    public static void startActivityForResult(@NonNull final Fragment fragment, @NonNull final Class<? extends Activity> clz, int requestCode, Bundle bundle) {
         Intent intent = new Intent(fragment.getContext(), clz);
-        startActivityForResult(fragment, intent, requestCode, options);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(fragment, intent, requestCode, null);
     }
 
     public static void startActivityForResult(@NonNull final Fragment fragment, @NonNull final Intent intent, int requestCode, Bundle options) {
@@ -47,9 +50,12 @@ public class ActivityUtil {
         startActivityForResult(activity, clz, requestCode, null);
     }
 
-    public static void startActivityForResult(@NonNull final Activity activity, @NonNull final Class<? extends Activity> clz, int requestCode, Bundle options) {
+    public static void startActivityForResult(@NonNull final Activity activity, @NonNull final Class<? extends Activity> clz, int requestCode, Bundle bundle) {
         Intent intent = new Intent(activity, clz);
-        startActivityForResult(activity, intent, requestCode, options);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(activity, intent, requestCode, null);
     }
 
     public static void startActivityForResult(@NonNull final Activity activity, @NonNull final Intent intent, int requestCode) {
