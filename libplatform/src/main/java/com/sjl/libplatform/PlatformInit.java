@@ -44,12 +44,12 @@ public class PlatformInit {
 
             @Override
             public void onActivityStarted(Activity activity) {
-
+                topActivity = activity;
             }
 
             @Override
             public void onActivityResumed(Activity activity) {
-
+                topActivity = activity;
             }
 
             @Override

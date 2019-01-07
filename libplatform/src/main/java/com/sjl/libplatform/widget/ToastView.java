@@ -154,7 +154,7 @@ public class ToastView {
             timer.cancel();
             timer = null;
         }
-        if(timerTask!=null){
+        if (timerTask != null) {
             timerTask.cancel();
             timerTask = null;
         }
