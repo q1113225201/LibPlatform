@@ -8,6 +8,8 @@ import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,11 +71,11 @@ public class ToastView {
 
     private Activity activity;
 
-    public ToastView(Activity activity) {
+    public ToastView(@NonNull Activity activity) {
         this(activity, null, Toast.LENGTH_SHORT);
     }
 
-    public ToastView(Activity activity, CharSequence text, int duration) {
+    public ToastView(@NonNull Activity activity, CharSequence text, int duration) {
         this.activity = activity;
         this.text = text;
         this.duration = duration;
@@ -84,12 +86,12 @@ public class ToastView {
     private void initToast() {
         if (isNotificationEnabled(activity)) {
             if (textToast == null) {
-                textToast = Toast.makeText(activity, "", duration);
+                textToast = Toast.makeText(activity.getApplicationContext(), "", duration);
                 textToast.setDuration(duration);
                 textToast.setGravity(gravity, offsetX, offsetY);
             }
             if (viewToast == null) {
-                viewToast = Toast.makeText(activity, "", duration);
+                viewToast = Toast.makeText(activity.getApplicationContext(), "", duration);
                 viewToast.setDuration(duration);
                 viewToast.setGravity(gravity, offsetX, offsetY);
                 viewToast.setView(contentParentView);
@@ -134,6 +136,14 @@ public class ToastView {
         }
     }
 
+    private Handler handler = new Handler();
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            ToastView.this.cancel();
+            handler.removeCallbacks(runnable);
+        }
+    };
     private Timer timer;
     private TimerTask timerTask;
 
@@ -143,7 +153,7 @@ public class ToastView {
         timerTask = new TimerTask() {
             @Override
             public void run() {
-                ToastView.this.cancel();
+                handler.post(runnable);
             }
         };
         timer.schedule(timerTask, duration == Toast.LENGTH_SHORT ? LENGTH_SHORT : LENGTH_LONG);
