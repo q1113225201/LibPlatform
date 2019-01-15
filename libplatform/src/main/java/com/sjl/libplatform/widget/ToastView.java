@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sjl.libplatform.R;
+import com.sjl.libplatform.util.Util;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -37,19 +38,15 @@ public class ToastView {
     private static final int LENGTH_LONG = 3500;
     private static final int LENGTH_SHORT = 2000;
     /**
-     * 文字toast
+     * toast
      */
-    private Toast textToast;
-    /**
-     * 视图toast
-     */
-    private Toast viewToast;
+    private Toast toast;
     /**
      * 无权限时用PopupWindow
      */
     private PopupWindow popupWindow;
     /**
-     * PopupWindow内容容器
+     * 内容容器，防止出现一跳一跳的效果
      */
     private LinearLayout contentParentView;
     /**
@@ -68,14 +65,27 @@ public class ToastView {
     private int offsetY = 200;
     private int duration;
     private CharSequence text;
+    /**
+     * 计时
+     */
+    private Timer timer;
+    private TimerTask timerTask;
+    private Handler handler = new Handler();
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            ToastView.this.cancel();
+            handler.removeCallbacks(runnable);
+        }
+    };
 
     private Activity activity;
 
-    public ToastView(@NonNull Activity activity) {
+    public ToastView(Activity activity) {
         this(activity, null, Toast.LENGTH_SHORT);
     }
 
-    public ToastView(@NonNull Activity activity, CharSequence text, int duration) {
+    public ToastView(Activity activity, CharSequence text, int duration) {
         this.activity = activity;
         this.text = text;
         this.duration = duration;
@@ -84,17 +94,11 @@ public class ToastView {
     }
 
     private void initToast() {
-        if (isNotificationEnabled(activity)) {
-            if (textToast == null) {
-                textToast = Toast.makeText(activity.getApplicationContext(), "", duration);
-                textToast.setDuration(duration);
-                textToast.setGravity(gravity, offsetX, offsetY);
-            }
-            if (viewToast == null) {
-                viewToast = Toast.makeText(activity.getApplicationContext(), "", duration);
-                viewToast.setDuration(duration);
-                viewToast.setGravity(gravity, offsetX, offsetY);
-                viewToast.setView(contentParentView);
+        if (Util.isNotificationEnabled(activity)) {
+            if (toast == null) {
+                toast = Toast.makeText(activity, "", duration);
+                toast.setDuration(duration);
+                toast.setGravity(gravity, offsetX, offsetY);
             }
         } else if (popupWindow == null) {
             popupWindow = new PopupWindow(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -113,20 +117,26 @@ public class ToastView {
     public void show() {
         initToast();
         startTimer();
-        if (isNotificationEnabled(activity)) {
+        if (Util.isNotificationEnabled(activity)) {
+            //有权限使用原生Toast
             if (contentView != null) {
+                //视图
                 setCustomView();
-                viewToast.show();
+                toast.setView(contentParentView);
             } else {
-                textToast.setGravity(gravity, offsetX, offsetY);
-                textToast.setText(text);
-                textToast.show();
+                //text
+                toast.setGravity(gravity, offsetX, offsetY);
+                toast.setText(text);
             }
+            toast.show();
         } else {
+            //无权限使用PopupWindow
             if (contentView != null) {
+                //视图
                 setCustomView();
                 popupWindow.setContentView(contentParentView);
             } else {
+                //text
                 ((TextView) defaultView.findViewById(R.id.tv_default_text)).setText(text);
                 popupWindow.setContentView(defaultView);
             }
@@ -136,17 +146,9 @@ public class ToastView {
         }
     }
 
-    private Handler handler = new Handler();
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            ToastView.this.cancel();
-            handler.removeCallbacks(runnable);
-        }
-    };
-    private Timer timer;
-    private TimerTask timerTask;
-
+    /**
+     * 开始计时
+     */
     private void startTimer() {
         stopTimer();
         timer = new Timer();
@@ -159,6 +161,9 @@ public class ToastView {
         timer.schedule(timerTask, duration == Toast.LENGTH_SHORT ? LENGTH_SHORT : LENGTH_LONG);
     }
 
+    /**
+     * 结束计时
+     */
     private void stopTimer() {
         if (timer != null) {
             timer.cancel();
@@ -181,41 +186,16 @@ public class ToastView {
         contentParentView.addView(contentView);
     }
 
+    /**
+     * 取消ToastView显示
+     */
     public void cancel() {
         stopTimer();
         if (popupWindow != null) {
             popupWindow.dismiss();
         }
-        if (viewToast != null) {
-            viewToast.cancel();
-        }
-        if (textToast != null) {
-            textToast.cancel();
-        }
-    }
-
-    /**
-     * 检查通知栏权限有没有开启
-     */
-    public static boolean isNotificationEnabled(Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE)).areNotificationsEnabled();
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            AppOpsManager appOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-            ApplicationInfo appInfo = context.getApplicationInfo();
-            String pkg = context.getApplicationContext().getPackageName();
-            int uid = appInfo.uid;
-            try {
-                Class<?> appOpsClass = Class.forName(AppOpsManager.class.getName());
-                Method checkOpNoThrowMethod = appOpsClass.getMethod("checkOpNoThrow", Integer.TYPE, Integer.TYPE, String.class);
-                Field opPostNotificationValue = appOpsClass.getDeclaredField("OP_POST_NOTIFICATION");
-                int value = (Integer) opPostNotificationValue.get(Integer.class);
-                return (Integer) checkOpNoThrowMethod.invoke(appOps, value, uid, pkg) == 0;
-            } catch (NoSuchMethodException | NoSuchFieldException | InvocationTargetException | IllegalAccessException | RuntimeException | ClassNotFoundException ignored) {
-                return true;
-            }
-        } else {
-            return true;
+        if (toast != null) {
+            toast.cancel();
         }
     }
 
@@ -238,5 +218,4 @@ public class ToastView {
         this.offsetX = offsetX;
         this.offsetY = offsetY;
     }
-
 }
