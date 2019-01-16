@@ -30,7 +30,6 @@ public class PagerActivity extends PlatformActivity {
     public void initView() {
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
-
     }
 
     @Override

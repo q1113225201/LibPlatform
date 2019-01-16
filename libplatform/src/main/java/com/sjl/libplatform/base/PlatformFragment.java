@@ -41,16 +41,31 @@ public abstract class PlatformFragment extends Fragment implements IPlatformView
         if (contentView == null) {
             contentView = inflater.inflate(getContentViewLayout(), container, false);
         }
+//        Log.e(TAG,"onCreateView");
         toInitView();
         if (isVisible && !isInitData) {
+//            Log.e(TAG,"onCreateView  isVisible && !isInitData");
             isInitData = true;
             initData(getArguments());
         }
         return contentView;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+//        Log.e(TAG,"onViewCreated");
+        if (!isInitData) {
+//            Log.e(TAG,"onViewCreated  isVisible && !isInitData");
+            isInitData = true;
+            initData(getArguments());
+        }
+    }
+
     private void toInitView() {
+//        Log.e(TAG,"toInitView");
         if (!isInitView) {
+//            Log.e(TAG,"toInitView !isInitView");
             isInitView = true;
             initView();
         }
@@ -59,17 +74,22 @@ public abstract class PlatformFragment extends Fragment implements IPlatformView
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+//        Log.e(TAG,"setUserVisibleHint");
         if (isVisibleToUser) {
+//            Log.e(TAG,"setUserVisibleHint isVisibleToUser");
             this.isVisible = true;
         }
         if (contentView == null) {
+//            Log.e(TAG,"setUserVisibleHint contentView == null");
             return;
         }
         if (!isInitData && isVisible) {
+//            Log.e(TAG,"setUserVisibleHint !isInitData && isVisible");
             isInitData = true;
             initData(getArguments());
         }
         if (isVisible) {
+//            Log.e(TAG,"setUserVisibleHint isVisible");
             this.isVisible = false;
         }
     }

@@ -19,7 +19,9 @@
         </activity>
         <activity android:name=".util.KeyboardActivity" />
         <activity android:name=".fragment.PagerActivity" />
-        <activity android:name=".toast.ToastActivity"></activity>
+        <activity android:name=".toast.ToastActivity" />
+        <activity android:name=".fragment.OneFragmentActivity" />
+        <activity android:name=".fragment.FragmentTypeActivity"></activity>
     </application>
 
 </manifest>

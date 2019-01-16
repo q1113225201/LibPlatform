@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.sjl.libplatform.base.PlatformActivity;
-import com.sjl.libplatform.fragment.PagerActivity;
+import com.sjl.libplatform.fragment.FragmentTypeActivity;
 import com.sjl.libplatform.toast.ToastActivity;
 import com.sjl.libplatform.util.ActivityUtil;
 import com.sjl.libplatform.util.KeyboardActivity;
@@ -35,7 +35,7 @@ public class MainActivity extends PlatformActivity implements View.OnClickListen
                 ActivityUtil.startActivity(this, KeyboardActivity.class);
                 break;
             case R.id.btn_fragment:
-                ActivityUtil.startActivity(this, PagerActivity.class);
+                ActivityUtil.startActivity(this, FragmentTypeActivity.class);
                 break;
             case R.id.btn_toast:
                 ActivityUtil.startActivity(this, ToastActivity.class);

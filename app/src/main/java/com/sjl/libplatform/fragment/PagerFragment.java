@@ -20,6 +20,7 @@ public class PagerFragment extends PlatformFragment {
     }
 
     private int cnt = 0;
+    private int type;
 
     @Override
     public int getContentViewLayout() {
@@ -30,6 +31,7 @@ public class PagerFragment extends PlatformFragment {
 
     @Override
     public void initView() {
+        type = getArguments().getInt("type");
         Log.e(TAG,"initView:"+getArguments().getInt("type"));
         tvName = findViewById(R.id.tv_name);
         findViewById(R.id.tv_name).setOnClickListener(new View.OnClickListener() {
@@ -37,6 +39,7 @@ public class PagerFragment extends PlatformFragment {
             public void onClick(View v) {
                 Log.e(TAG,"cnt="+cnt);
                 cnt++;
+                tvName.setText(tvName.getText() + "\n" + cnt);
             }
         });
     }
@@ -54,7 +57,7 @@ public class PagerFragment extends PlatformFragment {
 
     @Override
     public void onDestroyView() {
-        Log.e(TAG,"onDestroyView");
+        Log.e(TAG,"onDestroyView:"+type);
         super.onDestroyView();
     }
 }
