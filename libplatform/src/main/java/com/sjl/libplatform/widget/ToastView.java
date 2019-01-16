@@ -1,15 +1,9 @@
 package com.sjl.libplatform.widget;
 
 import android.app.Activity;
-import android.app.AppOpsManager;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +16,6 @@ import android.widget.Toast;
 import com.sjl.libplatform.R;
 import com.sjl.libplatform.util.Util;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -78,6 +69,10 @@ public class ToastView {
             handler.removeCallbacks(runnable);
         }
     };
+    /**
+     * 是否显示
+     */
+    private boolean isShow = false;
 
     private Activity activity;
 
@@ -146,11 +141,16 @@ public class ToastView {
         }
     }
 
+    public boolean isShowing() {
+        return isShow;
+    }
+
     /**
      * 开始计时
      */
     private void startTimer() {
         stopTimer();
+        isShow = true;
         timer = new Timer();
         timerTask = new TimerTask() {
             @Override
@@ -190,6 +190,7 @@ public class ToastView {
      * 取消ToastView显示
      */
     public void cancel() {
+        isShow = false;
         stopTimer();
         if (popupWindow != null) {
             popupWindow.dismiss();
