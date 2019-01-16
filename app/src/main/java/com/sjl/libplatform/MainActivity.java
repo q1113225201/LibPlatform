@@ -9,7 +9,7 @@ import com.sjl.libplatform.toast.ToastActivity;
 import com.sjl.libplatform.util.ActivityUtil;
 import com.sjl.libplatform.util.KeyboardActivity;
 
-public class MainActivity extends PlatformActivity implements View.OnClickListener {
+public class MainActivity extends PlatformActivity {
 
     @Override
     public int getContentViewLayout() {
