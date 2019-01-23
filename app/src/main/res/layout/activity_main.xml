@@ -5,10 +5,10 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn_util_keyboard"
+        android:id="@+id/btn_keyboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="util-Keyboard" />
+        android:text="Keyboard" />
 
     <Button
         android:id="@+id/btn_fragment"
@@ -20,5 +20,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="toast" />
+    <Button
+        android:id="@+id/btn_encrypt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="加解密" />
 
 </LinearLayout>

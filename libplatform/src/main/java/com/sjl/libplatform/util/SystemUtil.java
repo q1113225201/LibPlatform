@@ -59,4 +59,5 @@ public class SystemUtil {
         intent.setData(Uri.fromParts("package", activity.getPackageName(), null));
         activity.startActivity(intent);
     }
+
 }

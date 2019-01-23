@@ -21,7 +21,8 @@
         <activity android:name=".fragment.PagerActivity" />
         <activity android:name=".toast.ToastActivity" />
         <activity android:name=".fragment.OneFragmentActivity" />
-        <activity android:name=".fragment.FragmentTypeActivity"></activity>
+        <activity android:name=".fragment.FragmentTypeActivity" />
+        <activity android:name=".encrypt.EncryptActivity"></activity>
     </application>
 
 </manifest>
