@@ -7,16 +7,15 @@ import android.widget.TextView;
 
 import com.sjl.libplatform.R;
 import com.sjl.libplatform.base.PlatformActivity;
-import com.sjl.libplatform.util.ByteUtil;
+import com.sjl.libplatform.util.AESUtil;
 import com.sjl.libplatform.util.ClipboardUtil;
-import com.sjl.libplatform.util.EncryptUtil;
+import com.sjl.libplatform.util.DESUtil;
+import com.sjl.libplatform.util.MD5Util;
 import com.sjl.libplatform.util.ToastUtil;
 
-import java.io.UnsupportedEncodingException;
-
 public class EncryptActivity extends PlatformActivity {
-    private static final String DES_KEY = "12345678";
     EditText etData;
+    EditText etKey;
     TextView tvData;
 
     @Override
@@ -27,6 +26,7 @@ public class EncryptActivity extends PlatformActivity {
     @Override
     public void initView() {
         etData = findViewById(R.id.et_data);
+        etKey = findViewById(R.id.et_key);
         tvData = findViewById(R.id.tv_data);
         findViewById(R.id.tv_data).setOnClickListener(this);
         findViewById(R.id.btn_paste).setOnClickListener(this);
@@ -34,6 +34,8 @@ public class EncryptActivity extends PlatformActivity {
         findViewById(R.id.btn_md5_32_encrypt).setOnClickListener(this);
         findViewById(R.id.btn_des_encrypt).setOnClickListener(this);
         findViewById(R.id.btn_des_decrypt).setOnClickListener(this);
+        findViewById(R.id.btn_aes_encrypt).setOnClickListener(this);
+        findViewById(R.id.btn_aes_decrypt).setOnClickListener(this);
     }
 
     @Override
@@ -52,16 +54,22 @@ public class EncryptActivity extends PlatformActivity {
                 etData.setText(ClipboardUtil.pasteText(this));
                 break;
             case R.id.btn_md5_16_encrypt:
-                tvData.setText(EncryptUtil.encrypt16MD5(etData.getText().toString()));
+                tvData.setText(MD5Util.encrypt16MD5(etData.getText().toString()));
                 break;
             case R.id.btn_md5_32_encrypt:
-                tvData.setText(EncryptUtil.encrypt32MD5(etData.getText().toString()));
+                tvData.setText(MD5Util.encrypt32MD5(etData.getText().toString()));
                 break;
             case R.id.btn_des_encrypt:
-                tvData.setText(EncryptUtil.encryptDES(DES_KEY,etData.getText().toString()));
+                tvData.setText(DESUtil.encrypt(etKey.getText().toString(), etData.getText().toString()));
                 break;
             case R.id.btn_des_decrypt:
-                tvData.setText(EncryptUtil.decryptDES(DES_KEY,etData.getText().toString()));
+                tvData.setText(DESUtil.decrypt(etKey.getText().toString(), etData.getText().toString()));
+                break;
+            case R.id.btn_aes_encrypt:
+                tvData.setText(AESUtil.encrypt(etKey.getText().toString(), etData.getText().toString()));
+                break;
+            case R.id.btn_aes_decrypt:
+                tvData.setText(AESUtil.decrypt(etKey.getText().toString(), etData.getText().toString()));
                 break;
         }
     }
