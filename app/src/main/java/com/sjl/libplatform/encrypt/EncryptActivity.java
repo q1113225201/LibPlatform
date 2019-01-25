@@ -73,4 +73,5 @@ public class EncryptActivity extends PlatformActivity {
                 break;
         }
     }
+
 }

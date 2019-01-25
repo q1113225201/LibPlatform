@@ -31,6 +31,10 @@ public class ByteUtil {
      */
     public static byte[] strToBytes(String str) {
         int length = str.length();
+        if (length % 2 != 0) {
+            str = "0" + str;
+            length++;
+        }
         byte[] data = new byte[length / 2];
         for (int i = 0; i < length; i += 2) {
             data[i / 2] = (byte) ((Character.digit(str.charAt(i), 16) << 4)

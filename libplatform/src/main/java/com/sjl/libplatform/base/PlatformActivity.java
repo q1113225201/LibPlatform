@@ -21,6 +21,7 @@ import com.sjl.libplatform.util.Util;
  * @date 2018/9/21
  */
 public abstract class PlatformActivity extends AppCompatActivity implements IPlatformView, View.OnClickListener {
+    public final String TAG = getClass().getSimpleName();
     /**
      * 内容视图
      */
