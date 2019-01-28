@@ -3,7 +3,7 @@ package com.sjl.libplatform.util;
 /**
  * EncryptUtils
  *
- * @author 沈建林
+ * @author 林zero
  * @date 2019/1/25
  */
 

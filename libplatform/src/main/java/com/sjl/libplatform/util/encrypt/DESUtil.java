@@ -1,4 +1,6 @@
-package com.sjl.libplatform.util;
+package com.sjl.libplatform.util.encrypt;
+
+import com.sjl.libplatform.util.ByteUtil;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -17,7 +19,7 @@ import javax.crypto.spec.DESKeySpec;
  * DESUtil
  * 对称加密
  *
- * @author 沈建林
+ * @author 林zero
  * @date 2019/1/24
  */
 public class DESUtil {
@@ -71,10 +73,10 @@ public class DESUtil {
      *
      * @param key
      * @param data
-     * @param type 加解密类型 Cipher.DECRYPT_MODE Cipher.ENCRYPT_MODE
+     * @param mode 加解密类型 Cipher.DECRYPT_MODE Cipher.ENCRYPT_MODE
      * @return
      */
-    private static byte[] doFinal(byte[] key, byte[] data, int type) {
+    private static byte[] doFinal(byte[] key, byte[] data, int mode) {
         try {
             //生成可信任随机数源
             SecureRandom secureRandom = new SecureRandom();
@@ -84,7 +86,7 @@ public class DESUtil {
             SecretKey secretKey = secretKeyFactory.generateSecret(desKeySpec);
             //Cipher对象实际完成加解密操作
             Cipher cipher = Cipher.getInstance("DES");
-            cipher.init(type, secretKey, secureRandom);
+            cipher.init(mode, secretKey, secureRandom);
             return cipher.doFinal(data);
         } catch (InvalidKeyException
                 | NoSuchAlgorithmException

@@ -1,4 +1,6 @@
-package com.sjl.libplatform.util;
+package com.sjl.libplatform.util.encrypt;
+
+import com.sjl.libplatform.util.ByteUtil;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -16,7 +18,7 @@ import javax.crypto.spec.SecretKeySpec;
  * AESUtil
  * 对称加密
  *
- * @author 沈建林
+ * @author 林zero
  * @date 2019/1/24
  */
 public class AESUtil {
@@ -72,18 +74,18 @@ public class AESUtil {
      *
      * @param key
      * @param data
-     * @param type
+     * @param mode
      * @return
      */
-    private static byte[] doFinal(byte[] key, byte[] data, byte[] iv, int type) {
+    private static byte[] doFinal(byte[] key, byte[] data, byte[] iv, int mode) {
         SecretKey secretKey = new SecretKeySpec(key, AES);
         try {
             Cipher cipher = Cipher.getInstance(TRANSFORMATION);
             if (iv == null || iv.length == 0) {
-                cipher.init(type, secretKey);
+                cipher.init(mode, secretKey);
             } else {
                 IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
-                cipher.init(type, secretKey, ivParameterSpec);
+                cipher.init(mode, secretKey, ivParameterSpec);
             }
             return cipher.doFinal(data);
         } catch (NoSuchAlgorithmException

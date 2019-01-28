@@ -1,6 +1,8 @@
-package com.sjl.libplatform.util;
+package com.sjl.libplatform.util.encrypt;
 
 import android.support.annotation.NonNull;
+
+import com.sjl.libplatform.util.ByteUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * MD5Util
  *
- * @author 沈建林
+ * @author 林zero
  * @date 2019/1/24
  */
 public class MD5Util {
