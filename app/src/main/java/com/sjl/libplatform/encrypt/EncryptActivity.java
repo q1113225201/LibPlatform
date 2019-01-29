@@ -36,7 +36,6 @@ public class EncryptActivity extends PlatformActivity {
         findViewById(R.id.tv_des_init).setOnClickListener(this);
         findViewById(R.id.btn_des_encrypt).setOnClickListener(this);
         findViewById(R.id.btn_des_decrypt).setOnClickListener(this);
-        findViewById(R.id.tv_aes_init).setOnClickListener(this);
         findViewById(R.id.btn_aes_encrypt).setOnClickListener(this);
         findViewById(R.id.btn_aes_decrypt).setOnClickListener(this);
         findViewById(R.id.btn_rsa_encrypt_public).setOnClickListener(this);
@@ -90,11 +89,6 @@ public class EncryptActivity extends PlatformActivity {
                 break;
             case R.id.btn_des_decrypt:
                 tvData.setText(DESUtil.decrypt(etKey.getText().toString(), etData.getText().toString()));
-                break;
-            case R.id.tv_aes_init:
-                //AES数据初始化
-                etData.setText("12345678123456781234567812345678");
-                etKey.setText("12345678123456781234567812345678");
                 break;
             case R.id.btn_aes_encrypt:
                 tvData.setText(AESUtil.encrypt(etKey.getText().toString(), etData.getText().toString()));

@@ -2,7 +2,6 @@ package com.sjl.libplatform.util.encrypt;
 
 import com.sjl.libplatform.util.ByteUtil;
 
-import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -11,7 +10,6 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
@@ -23,7 +21,6 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class AESUtil {
     private static final String AES = "AES";
-    private static final String TRANSFORMATION = "AES/ECB/NoPadding";
 
     /**
      * 加密
@@ -33,7 +30,7 @@ public class AESUtil {
      * @return
      */
     public static String encrypt(String key, String data) {
-        return ByteUtil.byte2Str(encrypt(ByteUtil.strToBytes(key), ByteUtil.strToBytes(data)));
+        return ByteUtil.byte2Str(encrypt(key.getBytes(), data.getBytes()));
     }
 
     /**
@@ -44,7 +41,7 @@ public class AESUtil {
      * @return
      */
     public static byte[] encrypt(byte[] key, byte[] data) {
-        return doFinal(key, data,null, Cipher.ENCRYPT_MODE);
+        return doFinal(key, data, Cipher.ENCRYPT_MODE);
     }
 
     /**
@@ -55,7 +52,7 @@ public class AESUtil {
      * @return
      */
     public static String decrypt(String key, String data) {
-        return ByteUtil.byte2Str(decrypt(ByteUtil.strToBytes(key), ByteUtil.strToBytes(data)));
+        return new String(decrypt(key.getBytes(), ByteUtil.strToBytes(data)));
     }
 
     /**
@@ -66,7 +63,7 @@ public class AESUtil {
      * @return
      */
     public static byte[] decrypt(byte[] key, byte[] data) {
-        return doFinal(key, data,null, Cipher.DECRYPT_MODE);
+        return doFinal(key, data, Cipher.DECRYPT_MODE);
     }
 
     /**
@@ -77,21 +74,15 @@ public class AESUtil {
      * @param mode
      * @return
      */
-    private static byte[] doFinal(byte[] key, byte[] data, byte[] iv, int mode) {
-        SecretKey secretKey = new SecretKeySpec(key, AES);
+    private static byte[] doFinal(byte[] key, byte[] data, int mode) {
+        SecretKey secretKey = new SecretKeySpec(generateKey(key), AES);
         try {
-            Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-            if (iv == null || iv.length == 0) {
-                cipher.init(mode, secretKey);
-            } else {
-                IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
-                cipher.init(mode, secretKey, ivParameterSpec);
-            }
+            Cipher cipher = Cipher.getInstance(AES);
+            cipher.init(mode, secretKey);
             return cipher.doFinal(data);
         } catch (NoSuchAlgorithmException
                 | NoSuchPaddingException
                 | InvalidKeyException
-                | InvalidAlgorithmParameterException
                 | BadPaddingException
                 | IllegalBlockSizeException e) {
             e.printStackTrace();
@@ -99,4 +90,15 @@ public class AESUtil {
         return null;
     }
 
+    private static byte[] generateKey(byte[] key) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(new String(key));
+        while (stringBuilder.length() < 16) {
+            stringBuilder.append("0");
+        }
+        if (stringBuilder.length() > 16) {
+            stringBuilder.setLength(16);
+        }
+        return stringBuilder.toString().getBytes();
+    }
 }

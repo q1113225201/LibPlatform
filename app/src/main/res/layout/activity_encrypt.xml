@@ -67,12 +67,6 @@
                 android:layout_height="wrap_content"
                 android:text="DES解密" />
 
-            <TextView
-                android:id="@+id/tv_aes_init"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="注：AES加解密数据长度需要32位倍数，秘钥只能32位和64位" />
-
             <Button
                 android:id="@+id/btn_aes_encrypt"
                 android:layout_width="match_parent"

@@ -24,6 +24,7 @@ public class ToastActivity extends PlatformActivity {
         findViewById(R.id.btn_show_text_gravity).setOnClickListener(this);
         findViewById(R.id.btn_show_view).setOnClickListener(this);
         findViewById(R.id.btn_show_view_gravity).setOnClickListener(this);
+        findViewById(R.id.btn_show).setOnClickListener(this);
     }
 
     @Override
@@ -53,6 +54,9 @@ public class ToastActivity extends PlatformActivity {
                 break;
             case R.id.btn_show_view_gravity:
                 ToastUtil.showToast(buildCustomView("cnt=" + cnt), Gravity.CENTER, 300, 0);
+                break;
+            case R.id.btn_show:
+                ToastUtils.showToast("cnt=" + cnt);
                 break;
         }
     }
