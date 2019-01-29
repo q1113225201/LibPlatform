@@ -22,7 +22,6 @@ public class KeyboardActivity extends PlatformActivity implements View.OnClickLi
         findViewById(R.id.btn_view_hide).setOnClickListener(this);
         findViewById(R.id.btn_activity_show).setOnClickListener(this);
         findViewById(R.id.btn_activity_hide).setOnClickListener(this);
-        findViewById(R.id.btn_toggle).setOnClickListener(this);
     }
 
     @Override
@@ -44,9 +43,6 @@ public class KeyboardActivity extends PlatformActivity implements View.OnClickLi
                 break;
             case R.id.btn_activity_hide:
                 KeyboardUtil.hideKeyboard(this);
-                break;
-            case R.id.btn_toggle:
-                KeyboardUtil.toggleKeyboard(this);
                 break;
         }
     }

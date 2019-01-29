@@ -68,13 +68,4 @@ public class KeyboardUtil {
         }
     }
 
-    /**
-     * 切换软键盘
-     */
-    public static void toggleKeyboard(Context context){
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-        }
-    }
 }
