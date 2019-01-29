@@ -97,18 +97,6 @@
                 android:layout_height="wrap_content"
                 android:text="RSA私钥解密" />
 
-            <Button
-                android:id="@+id/btn_rsa_encrypt_private"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RSA私钥加密" />
-
-            <Button
-                android:id="@+id/btn_rsa_decrypt_public"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RSA公钥解密" />
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

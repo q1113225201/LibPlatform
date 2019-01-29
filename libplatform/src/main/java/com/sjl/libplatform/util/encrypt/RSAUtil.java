@@ -52,51 +52,7 @@ public class RSAUtil {
      * @return
      */
     public static String encryptPublic(String key, String data) {
-        return Base64Util.encodeToString(encryptPublic(Base64Util.decode(key), Base64Util.encode(data)));
-    }
-
-    /**
-     * 私钥加密
-     *
-     * @param key
-     * @param data
-     * @return
-     */
-    public static byte[] encryptPrivate(byte[] key, byte[] data) {
-        return doFinal(key, data, false, Cipher.ENCRYPT_MODE);
-    }
-
-    /**
-     * 私钥加密
-     *
-     * @param key
-     * @param data
-     * @return
-     */
-    public static String encryptPrivate(String key, String data) {
-        return Base64Util.encodeToString(encryptPrivate(Base64Util.decode(key), Base64Util.encode(data)));
-    }
-
-    /**
-     * 公钥解密
-     *
-     * @param key
-     * @param data
-     * @return
-     */
-    public static byte[] decryptPublic(byte[] key, byte[] data) {
-        return doFinal(key, data, true, Cipher.DECRYPT_MODE);
-    }
-
-    /**
-     * 公钥解密
-     *
-     * @param key
-     * @param data
-     * @return
-     */
-    public static String decryptPublic(String key, String data) {
-        return new String(decryptPublic(Base64Util.decode(key), Base64Util.encode(data)));
+        return Base64Util.encodeToString(encryptPublic(Base64Util.decode(key), data.getBytes()));
     }
 
     /**
