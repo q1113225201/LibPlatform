@@ -67,6 +67,12 @@
                 android:layout_height="wrap_content"
                 android:text="DES解密" />
 
+            <EditText
+                android:id="@+id/et_iv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="iv（为空或16位）" />
+
             <Button
                 android:id="@+id/btn_aes_encrypt"
                 android:layout_width="match_parent"

@@ -17,6 +17,7 @@ import com.sjl.libplatform.util.encrypt.RSAUtil;
 public class EncryptActivity extends PlatformActivity {
     EditText etData;
     EditText etKey;
+    EditText etIV;
     TextView tvData;
 
     @Override
@@ -28,6 +29,7 @@ public class EncryptActivity extends PlatformActivity {
     public void initView() {
         etData = findViewById(R.id.et_data);
         etKey = findViewById(R.id.et_key);
+        etIV = findViewById(R.id.et_iv);
         tvData = findViewById(R.id.tv_data);
         findViewById(R.id.tv_data).setOnClickListener(this);
         findViewById(R.id.btn_paste).setOnClickListener(this);
@@ -91,10 +93,10 @@ public class EncryptActivity extends PlatformActivity {
                 tvData.setText(DESUtil.decrypt(etKey.getText().toString(), etData.getText().toString()));
                 break;
             case R.id.btn_aes_encrypt:
-                tvData.setText(AESUtil.encrypt(etKey.getText().toString(), etData.getText().toString()));
+                tvData.setText(AESUtil.encrypt(etKey.getText().toString(), etData.getText().toString(), etIV.getText().toString()));
                 break;
             case R.id.btn_aes_decrypt:
-                tvData.setText(AESUtil.decrypt(etKey.getText().toString(), etData.getText().toString()));
+                tvData.setText(AESUtil.decrypt(etKey.getText().toString(), etData.getText().toString(), etIV.getText().toString()));
                 break;
             case R.id.btn_rsa_encrypt_public:
                 tvData.setText(RSAUtil.encryptPublic(publicKey, etData.getText().toString()));
