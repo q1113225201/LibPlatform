@@ -34,11 +34,11 @@
 
 加密工具类->[encrypt](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt)
 
-* AES加解密[AESUtil.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/AESUtil.java)
-* DES加解密[DESUtil.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/DESUtil.java)
-* RSA加解密[RSAUtil.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/RSAUtil.java)
-* MD5加解密[MD5Util.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/MD5Util.java)
-* Base64加解密[Base64Util.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/Base64Util.java)
+* AES加解密->[AESUtil.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/AESUtil.java)
+* DES加解密->[DESUtil.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/DESUtil.java)
+* RSA加解密->[RSAUtil.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/RSAUtil.java)
+* MD5加密->[MD5Util.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/MD5Util.java)
+* Base64加解密->[Base64Util.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/Base64Util.java)
 
 Activity工具类->[ActivityUtil.java](/libplatform/src/main/java/com/sjl/libplatform/util/ActivityUtil.java)
 
