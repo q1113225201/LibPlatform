@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.sjl.libplatform.util.KeyboardUtil;
-import com.sjl.libplatform.util.PermisstionUtil;
+import com.sjl.libplatform.util.PermissionUtil;
 import com.sjl.libplatform.util.Util;
 
 /**
@@ -49,7 +49,7 @@ public abstract class PlatformActivity extends AppCompatActivity implements IPla
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        PermisstionUtil.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionUtil.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override

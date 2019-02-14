@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 /**
- * SPUtil
+ * SharedPreferences工具类
  *
  * @author 林zero
  * @date 2018/9/27

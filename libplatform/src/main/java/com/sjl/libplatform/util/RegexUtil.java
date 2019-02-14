@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * RegexUtil
+ * 常用正则工具类
  *
  * @author 林zero
  * @date 2019/1/16

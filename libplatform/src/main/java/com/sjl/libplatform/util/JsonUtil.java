@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Json解析
+ * Json工具类
  *
  * @author 林zero
  * @date 2018/4/14

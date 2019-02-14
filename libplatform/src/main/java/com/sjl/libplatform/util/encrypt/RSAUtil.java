@@ -1,8 +1,5 @@
 package com.sjl.libplatform.util.encrypt;
 
-import com.sjl.libplatform.util.Base64Util;
-import com.sjl.libplatform.util.ByteUtil;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.security.InvalidKeyException;

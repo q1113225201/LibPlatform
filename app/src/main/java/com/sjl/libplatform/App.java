@@ -19,6 +19,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
+        //初始化
         PlatformInit.getInstance().init(this);
     }
 }

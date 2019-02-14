@@ -26,7 +26,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
- * File工具类
+ * 文件操作工具类
  *
  * @author 林zero
  * @date 2018/12/9

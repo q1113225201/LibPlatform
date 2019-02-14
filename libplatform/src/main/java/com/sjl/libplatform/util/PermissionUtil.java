@@ -27,8 +27,8 @@ import java.util.List;
  * @date 2017/3/22
  */
 @TargetApi(Build.VERSION_CODES.M)
-public class PermisstionUtil {
-    private static final String TAG = "PermisstionUtil";
+public class PermissionUtil {
+    private static final String TAG = "PermissionUtil";
     //日历
     public static String[] CALENDAR = {Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR};
     //相机

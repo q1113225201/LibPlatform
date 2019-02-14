@@ -13,7 +13,7 @@ import android.provider.MediaStore;
 import java.io.File;
 
 /**
- * Uri常用工具类
+ * Uri转换工具类
  *
  * @author 林zero
  * @date 2016/11/14 21:52

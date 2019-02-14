@@ -5,7 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 
 /**
- * ClipboardUtil
+ * 剪切板工具类
  *
  * @author 林zero
  * @date 2019/1/23

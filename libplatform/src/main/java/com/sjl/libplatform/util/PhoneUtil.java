@@ -8,7 +8,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 /**
- * PhoneUtil
+ * 手机设备相关工具类
  *
  * @author 林zero
  * @date 2018/12/12

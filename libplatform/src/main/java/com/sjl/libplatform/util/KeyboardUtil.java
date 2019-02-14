@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 /**
- * KeyboardUtil
+ * 软键盘工具类
  *
  * @author 林zero
  * @date 2018/12/11

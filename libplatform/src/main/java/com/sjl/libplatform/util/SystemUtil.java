@@ -8,7 +8,7 @@ import android.net.Uri;
 import android.view.WindowManager;
 
 /**
- * SystemUtil
+ * 常用系统功能工具类
  *
  * @author 林zero
  * @date 2018/9/21

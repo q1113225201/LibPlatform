@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
- * Util
+ * 工具类
  *
  * @author 林zero
  * @date 2018/12/14
