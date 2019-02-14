@@ -13,7 +13,7 @@
 
 ```
 	dependencies {
-	        implementation 'com.github.q1113225201:LibPlatform:1.0.5'
+	        implementation 'com.github.q1113225201:LibPlatform:1.0.6'
 	}
 ```
 
@@ -21,22 +21,24 @@
 
 ## 说明
 
-* ### 初始化->[App.java](/app/src/main/java/com/sjl/libplatform/App.java)
+### 初始化->[App.java](/app/src/main/java/com/sjl/libplatform/App.java)
 
 初始化[PlatformInit](/libplatform/src/main/java/com/sjl/libplatform/PlatformInit.java)传入Application，后续使用的上下文等都不再需要传入。
 
-* ### 基类->[base](/libplatform/src/main/java/com/sjl/libplatform/base)
+### 基类->[base](/libplatform/src/main/java/com/sjl/libplatform/base)
 
-封装有基类Activity[PlatformActivity.java](/libplatform/src/main/java/com/sjl/libplatform/base/PlatformActivity.java)、
-基类Fragment[PlatformFragment.java](/libplatform/src/main/java/com/sjl/libplatform/base/PlatformFragment.java)(支持懒加载)。
+封装有基类[PlatformActivity.java](/libplatform/src/main/java/com/sjl/libplatform/base/PlatformActivity.java)、
+基类[PlatformFragment.java](/libplatform/src/main/java/com/sjl/libplatform/base/PlatformFragment.java)(支持懒加载)。
 
-* ### 常用工具类->[util](/libplatform/src/main/java/com/sjl/libplatform/util)
+### 常用工具类->[util](/libplatform/src/main/java/com/sjl/libplatform/util)
 
-加密工具类->AES加解密[AESUtil.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/AESUtil.java)、
-DES加解密[DESUtil.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/DESUtil.java)、
-RSA加解密[RSAUtil.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/RSAUtil.java)、
-MD5加解密[MD5Util.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/MD5Util.java)、
-Base64加解密[Base64Util.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/Base64Util.java)
+加密工具类->[encrypt](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt)
+
+* AES加解密[AESUtil.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/AESUtil.java)
+* DES加解密[DESUtil.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/DESUtil.java)
+* RSA加解密[RSAUtil.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/RSAUtil.java)
+* MD5加解密[MD5Util.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/MD5Util.java)
+* Base64加解密[Base64Util.java](/libplatform/src/main/java/com/sjl/libplatform/util/encrypt/Base64Util.java)
 
 Activity工具类->[ActivityUtil.java](/libplatform/src/main/java/com/sjl/libplatform/util/ActivityUtil.java)
 
