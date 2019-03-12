@@ -31,6 +31,9 @@ public class OneFragmentActivity extends PlatformActivity {
         findViewById(R.id.btn_load1).setOnClickListener(this);
         findViewById(R.id.btn_load2).setOnClickListener(this);
         findViewById(R.id.btn_load3).setOnClickListener(this);
+        findViewById(R.id.btn_replace1).setOnClickListener(this);
+        findViewById(R.id.btn_replace2).setOnClickListener(this);
+        findViewById(R.id.btn_replace3).setOnClickListener(this);
     }
 
     @Override
@@ -50,7 +53,20 @@ public class OneFragmentActivity extends PlatformActivity {
             case R.id.btn_load3:
                 loadFragment("3");
                 break;
+            case R.id.btn_replace1:
+                replaceFragment("1");
+                break;
+            case R.id.btn_replace2:
+                replaceFragment("2");
+                break;
+            case R.id.btn_replace3:
+                replaceFragment("3");
+                break;
         }
+    }
+
+    private void replaceFragment(String num) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_content,getFragment(num)).commit();
     }
 
     private String lastTab = "0";

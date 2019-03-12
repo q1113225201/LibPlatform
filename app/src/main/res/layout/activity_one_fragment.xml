@@ -1,32 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_load1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="加载Fragment1" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_load2"
+        <Button
+            android:id="@+id/btn_load1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="加载Fragment1" />
+
+        <Button
+            android:id="@+id/btn_load2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="加载Fragment2" />
+
+        <Button
+            android:id="@+id/btn_load3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="加载Fragment3" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_load1"
-        android:text="加载Fragment2" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_load3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_load2"
-        android:text="加载Fragment3" />
+        <Button
+            android:id="@+id/btn_replace1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="替换Fragment1" />
+
+        <Button
+            android:id="@+id/btn_replace2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="替换Fragment2" />
+
+        <Button
+            android:id="@+id/btn_replace3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="替换Fragment3" />
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/fl_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/btn_load3"></FrameLayout>
+        android:layout_height="match_parent"></FrameLayout>
 
-</RelativeLayout>
+</LinearLayout>
